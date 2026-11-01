@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type ProductCardProps = {
+    id: number;
     name: string;
     price: number;
     imageSrc: string;
@@ -10,6 +12,7 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({
+    id,
     name,
     price,
     imageSrc,
@@ -22,10 +25,11 @@ export default function ProductCard({
         currency: "BRL",
     }).format(price);
 
-    const isReadyStock = saleType === "ready_stock" && stockQuantity > 0;
+    const isLastUnit = saleType === "ready_stock" && stockQuantity === 1;
+    const isMadeToOrder = saleType === "made_to_order" || stockQuantity === 0;
 
     return (
-        <article className="product-card">
+        <Link href={`/colecao/${id}`} className="product-card">
             <div className="product-card-image">
                 <Image
                     src={imageSrc}
@@ -41,15 +45,23 @@ export default function ProductCard({
                     {formattedPrice}
                 </span>
 
-                <span className="product-card-availability">
-                    {saleType === "made_to_order"
+                <span
+                    className={`product-card-availability ${
+                        isLastUnit
+                            ? "product-card-availability-low"
+                            : isMadeToOrder
+                            ? "product-card-availability-order"
+                            : ""
+                    }`}
+                >
+                    {isMadeToOrder
                         ? "Sob encomenda"
-                        : stockQuantity === 1
+                        : isLastUnit
                         ? "Última unidade disponível!"
                         : `${stockQuantity} unidades disponíveis`
                     }
                 </span>
             </div>
-        </article>
+        </Link>
     );
 }
