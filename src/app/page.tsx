@@ -3,67 +3,90 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
+    <main>
+      <header className="header">
+        <a href="/" className="logo">
+          Rosa Merger
+        </a>
+
+        <nav className="navigation">
+          <a href="#inicio">Início</a>
+          <a href="#colecao">Coleção</a>
+          <a href="#sobre">Sobre</a>
+        </nav>
+
+        <a href="#colecao" className="header-button">
+          Ver coleção
+        </a>
+      </header>
+
+      <section id="inicio" className="hero">
+        <div className="hero-content">
+          <span className="eyebrow">FEITO À MÃO, COM CARINHO</span>
+
           <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
+            A beleza está
+            <br />
+            nos <em>detalhes.</em>
           </h1>
+
           <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+            Bolsas artesanais em crochê, feitas com cuidado,
+            personalidade e atenção a cada detalhe.
           </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+
+          <a href="#colecao" className="hero-button">
+            Conheça a coleção
           </a>
         </div>
-      </main>
-    </div>
+
+        <div className="hero-image">
+          <span>Artesanal por essência.</span>
+        </div>
+      </section>
+
+      <section id="colecao" className="collection">
+        <span className="eyebrow">NOSSA SELEÇÃO</span>
+        <h2>Peças feitas para encantar</h2>
+        <p>
+          Cada bolsa carrega um pouco da dedicação e do cuidado
+          presentes no trabalho artesanal.
+        </p>
+      </section>
+
+      <section id="sobre" className="about">
+        <div className="about-image">
+          <span>O cuidado está em cada ponto.</span>
+        </div>
+
+        <div className="about-content">
+          <span className="eyebrow">UM POUCO DA MINHA HISTÓRIA</span>
+
+          <h2>
+            Cada peça tem
+            <em> um toque especial.</em>
+          </h2>
+
+          <p>
+            Tudo começou com o carinho pelo trabalho artesanal e a
+            paixão por transformar fios em peças únicas.
+          </p>
+
+          <p>
+            Cada bolsa é confeccionada à mão, com dedicação e atenção
+            aos detalhes, respeitando o tempo e a delicadeza de cada criação.
+          </p>
+
+          <p>
+            Quero criar peças que acompanhem momentos especiais e
+            expressem a personalidade de quem as usa.
+          </p>
+
+          <a href="#colecao" className="about-button">
+            Conheça minhas criações
+          </a>
+        </div>
+      </section>
+    </main>
   );
 }
