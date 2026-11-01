@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header"
 import Hero from "@/components/home/Hero"
 import Collection from "@/components/home/Collection"
 import About from "@/components/home/About"
+import Footer from "@/components/layout/Footer"
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <Collection />
       <About />
+      <Footer />
     </main>
   );
 }
