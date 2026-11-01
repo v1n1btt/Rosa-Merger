@@ -15,7 +15,7 @@ export default function Hero() {
                 personalidade e atenção a cada detalhe.
             </p>
 
-            <a href="#colecao" className="hero-button">
+            <a href="/colecao" className="hero-button">
                 Conheça a coleção
             </a>
             </div>

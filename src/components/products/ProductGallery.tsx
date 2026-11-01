@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import next from "next";
 
 type ProductGalleryProps = {
     images: {
@@ -20,6 +21,7 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
+    const touchStartX = useRef<number | null>(null);
 
     const previousImage = useCallback(() => {
         setCurrentIndex((current) =>
@@ -32,6 +34,27 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
             current === images.length - 1 ? 0 : current + 1
         );
     }, [images.length]);
+
+    const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+        if(event.pointerType === "mouse") return;
+
+        touchStartX.current = event.clientX;
+    };
+
+    const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+        if(touchStartX.current === null) return;
+
+        const difference = event.clientX - touchStartX.current;
+        const minimumSwipeDistance = 50;
+
+        if(difference > minimumSwipeDistance){
+            previousImage();
+        } else if(difference < -minimumSwipeDistance){
+            nextImage();
+        }
+
+        touchStartX.current = null;
+    }
 
     useEffect(() => {
         const updateImageSize = () => {
@@ -91,9 +114,14 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
 
     return (
         <div className="product-gallery">
-            <div
+            <div 
                 className="product-gallery-main"
                 onClick={() => setIsExpanded(true)}
+                onPointerDown={handlePointerDown}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={() => {
+                    touchStartX.current = null;
+                }}
                 role="button"
                 tabIndex={0}
                 aria-label="Ampliar imagem do produto"
@@ -104,39 +132,24 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
                     }
                 }}
             >
-                <Image
-                    src={images[currentIndex].src}
-                    alt={images[currentIndex].alt}
-                    fill
-                    priority
-                    sizes="(max-width: 700px) 100vw, 50vw"
-                />
-
-                {images.length > 1 && (
-                    <>
-                        <button
-                            className="product-gallery-arrow product-gallery-previous"
-                            onClick={(event) => {
-                                event.stopPropagation();
-                                previousImage();
-                            }}
-                            aria-label="Foto anterior"
-                        >
-                            ‹
-                        </button>
-
-                        <button
-                            className="product-gallery-arrow product-gallery-next"
-                            onClick={(event) => {
-                                event.stopPropagation();
-                                nextImage();
-                            }}
-                            aria-label="Próxima foto"
-                        >
-                            ›
-                        </button>
-                    </>
-                )}
+                <div
+                    className="product-gallery-track"
+                    style={{
+                        transform: `translateX(-${currentIndex * 100}%)`,
+                    }}
+                >
+                    {images.map((image, index) => (
+                        <div className="product-gallery-slide" key={image.src}>
+                            <Image
+                                src={image.src}
+                                alt={image.alt}
+                                fill
+                                priority={index === 0}
+                                sizes="(max-width: 700px) 100vw, 50vw"
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
 
             {images.length > 1 && (
@@ -147,6 +160,7 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
                             className={`product-gallery-thumbnail ${
                                 currentIndex === index ? "active" : ""
                             }`}
+                            onMouseEnter={() => setCurrentIndex(index)}
                             onClick={() => setCurrentIndex(index)}
                             aria-label={`Ver foto ${index + 1}`}
                             aria-pressed={currentIndex === index}

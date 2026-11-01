@@ -28,7 +28,7 @@ export default function About() {
                 expressem a personalidade de quem as usa.
             </p>
 
-            <a href="#colecao" className="about-button">
+            <a href="/colecao" className="about-button">
                 Conheça minhas criações
             </a>
             </div>

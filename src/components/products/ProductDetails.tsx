@@ -33,6 +33,22 @@ export default function ProductDetails({
 
                 <h1>{product.name}</h1>
 
+                <span
+                    className={`product-card-availability product-details-availability ${
+                        isLastUnit
+                            ? "product-card-availability-low"
+                            : isMadeToOrder
+                            ? "product-card-availaibiltiy-order"
+                            : ""
+                    }`}
+                >
+                    {isMadeToOrder
+                        ? "Sob encomenda"
+                        : isLastUnit
+                        ? "Última unidade disponível!"
+                        : `${product.stockQuantity} unidades disponíveis`}
+                </span>
+
                 <span className="product-details.price">
                     {formattedPrice}
                 </span>
@@ -60,22 +76,6 @@ export default function ProductDetails({
                         ))}
                     </ul>
                 </div>
-
-                <span
-                    className={`product-card-availability ${
-                        isLastUnit
-                            ? "product-card-availability-low"
-                            : isMadeToOrder
-                            ? "product-card-availaibiltiy-order"
-                            : ""
-                    }`}
-                >
-                    {isMadeToOrder
-                        ? "Sob encomenda"
-                        : isLastUnit
-                        ? "Última unidade disponível!"
-                        : `${product.stockQuantity} unidades disponíveis`}
-                </span>
             </div>
         </section>
     );
