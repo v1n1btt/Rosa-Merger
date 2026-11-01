@@ -5,8 +5,10 @@ type ProductCardProps = {
     id: number;
     name: string;
     price: number;
-    imageSrc: string;
-    imageAlt: string;
+    images: {
+        src: string;
+        alt: string;
+    }[];
     saleType: "ready_stock" | "made_to_order";
     stockQuantity: number;
 };
@@ -15,8 +17,7 @@ export default function ProductCard({
     id,
     name,
     price,
-    imageSrc,
-    imageAlt,
+    images,
     saleType,
     stockQuantity,
 }: ProductCardProps) {
@@ -32,8 +33,8 @@ export default function ProductCard({
         <Link href={`/colecao/${id}`} className="product-card">
             <div className="product-card-image">
                 <Image
-                    src={imageSrc}
-                    alt={imageAlt}
+                    src={images[0].src}
+                    alt={images[0].alt}
                     fill
                     sizes="(max-width: 700px) 100vw, 33vw"
                 />
