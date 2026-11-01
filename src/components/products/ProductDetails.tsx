@@ -22,6 +22,12 @@ export default function ProductDetails({
         product.saleType === "ready_stock" &&
         product.stockQuantity === 1;
 
+    const whatsappMessage = `Olá! Tenho interesse na bolsa ${product.name}. Gostaria de saber mais sobre a encomenda.`;
+
+    const whatsappUrl = `https://wa.me/5516996160058?text=${encodeURIComponent(
+        whatsappMessage
+    )}`;
+
     return (
         <section className="product-details">
             <ProductGallery images={product.images} />
@@ -52,6 +58,17 @@ export default function ProductDetails({
                 <span className="product-details.price">
                     {formattedPrice}
                 </span>
+
+                {isMadeToOrder && (
+                    <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="product-details-whatsapp"
+                    >
+                        Consultar pelo WhatsApp
+                    </a>
+                )}
 
                 <p className="product-details-description">
                     Feita artesanalmente com materiais de alta qualidade

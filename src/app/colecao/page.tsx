@@ -25,6 +25,13 @@ export default function CollectionPage() {
     });
 
     const sortedProducts = [...filteredProducts].sort((a, b) => {
+        const aIsMadeToOrder = a.saleType === "made_to_order";
+        const bIsMadeToOrder = b.saleType === "made_to_order";
+
+        if(aIsMadeToOrder !== bIsMadeToOrder){
+            return aIsMadeToOrder ? 1 : -1;
+        }
+
         if(sort === "price-asc"){
             return a.price - b.price;
         }

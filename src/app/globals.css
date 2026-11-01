@@ -583,6 +583,23 @@ button:focus-visible {
   color: var(--color-text);
 }
 
+.product-details-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 28px;
+  background-color: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.product-details-whatsapp:hover {
+  background-color: #46513e;
+}
+
 .product-details-description {
   max-width: 420px;
   color: var(--color-muted);
