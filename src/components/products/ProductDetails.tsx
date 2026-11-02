@@ -1,4 +1,5 @@
 import ProductGallery from "./ProductGallery";
+import AddToCartButton from "./AddToCartButton";
 
 import type { Product } from "@/lib/products";
 
@@ -59,7 +60,7 @@ export default function ProductDetails({
                     {formattedPrice}
                 </span>
 
-                {isMadeToOrder && (
+                {isMadeToOrder ? (
                     <a
                         href={whatsappUrl}
                         target="_blank"
@@ -68,6 +69,8 @@ export default function ProductDetails({
                     >
                         Consultar pelo WhatsApp
                     </a>
+                ) : (
+                    <AddToCartButton product={product} />
                 )}
 
                 <p className="product-details-description">

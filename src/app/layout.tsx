@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/contexts/CartContext";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-heading",
@@ -21,7 +22,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="pt-BR">
-      <body className={`${cormorant.variable} ${dmSans.variable}`}>{children}</body>
+      <body className={`${cormorant.variable} ${dmSans.variable}`}>
+        <CartProvider>
+          {children}
+        </CartProvider>
+      </body>
     </html>
   );
 }

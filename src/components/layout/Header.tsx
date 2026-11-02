@@ -1,3 +1,5 @@
+import CartIndicator from "../cart/CartIndicator"
+
 export default function Header() {
     return (
         <header className="header">
@@ -11,9 +13,7 @@ export default function Header() {
             <a href="/#sobre">Sobre</a>
             </nav>
 
-            <a href="/colecao" className="header-button">
-                Ver coleção
-            </a>
+            <CartIndicator />
         </header>
     )
 }
