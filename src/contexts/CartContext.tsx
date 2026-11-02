@@ -14,6 +14,7 @@ type CartItem = {
     price: number;
     image: string;
     quantity: number;
+    stockQuantity: number;
 }
 
 type CartContextType = {
@@ -56,12 +57,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
 
     function addToCart(item: Omit<CartItem, "quantity">) {
+        if(item.stockQuantity <= 0) return;
+
         setItems((currentItems) => {
             const existingItem = currentItems.find(
                 (cartItem) => cartItem.productId === item.productId
             );
 
             if(existingItem){
+                if(existingItem.quantity >= item.stockQuantity){
+                    return currentItems;
+                }
+
                 return currentItems.map((cartItem) =>
                     cartItem.productId === item.productId
                         ? { ...cartItem, quantity: cartItem.quantity + 1 }
@@ -85,7 +92,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setItems((currentItems) => 
             currentItems.map((item) =>
                 item.productId === productId
-                    ? { ...item, quantity }
+                    ? { ...item, quantity: Math.min(quantity, item.stockQuantity), }
                     : item
             )
         );

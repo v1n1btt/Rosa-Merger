@@ -18,6 +18,7 @@ export default function AddToCartButton({
             name: product.name,
             price: product.price,
             image: product.images[0].src,
+            stockQuantity: product.stockQuantity,
         });
     }
 

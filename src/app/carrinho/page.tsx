@@ -71,6 +71,7 @@ export default function CartPage() {
                                         <button
                                             type="button"
                                             onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                                            disabled={item.quantity >= item.stockQuantity}
                                             aria-label="Aumentar quantidade"
                                         >
                                             +
