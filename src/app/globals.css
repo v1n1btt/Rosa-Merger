@@ -102,6 +102,56 @@ button:focus-visible {
   color: var(--color-accent);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.auth-menu-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text);
+}
+
+.auth-menu-user svg {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.auth-menu-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-menu-user-info span {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.auth-menu-logout {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 11px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.auth-menu-logout:hover {
+  color: var(--color-accent);
+}
+
+.auth-menu-logout:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
 .cart-indicator {
   position: relative;
   display: inline-flex;
@@ -1000,6 +1050,47 @@ button:focus-visible {
   color: var(--color-text);
   font-size: 13px;
   text-decoration: underline;
+}
+
+.cart-checkout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 24px;
+  background-color: var(--color-accent);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.cart-checkout-button:hover {
+  background-color: #46513e;
+}
+
+/* ---------- Checkout ---------- */
+
+.checkout-page {
+  width: 100%;
+  max-width: var(--content-width);
+  min-height: 60vh;
+  margin: 0 auto;
+  padding: 64px var(--page-padding) 100px;
+}
+
+.checkout-page h1 {
+  margin-bottom: 24px;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 400;
+}
+
+.checkout-page p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.8;
 }
 
 /* ---------- Responsivo ---------- */

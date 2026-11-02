@@ -99,6 +99,10 @@ export default function CartPage() {
                         </div>
 
                         <p>O frete será calculado na próxima etapa.</p>
+
+                        <Link href="/checkout" className="cart-checkout-button">
+                            Finalizar compra
+                        </Link>
                     </aside>
                 </div>
 

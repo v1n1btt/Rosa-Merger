@@ -1,4 +1,5 @@
 import CartIndicator from "../cart/CartIndicator"
+import AuthMenu from "../auth/AuthMenu"
 
 export default function Header() {
     return (
@@ -13,7 +14,10 @@ export default function Header() {
             <a href="/#sobre">Sobre</a>
             </nav>
 
-            <CartIndicator />
+            <div className="header-actions">
+                <AuthMenu />
+                <CartIndicator />
+            </div>
         </header>
-    )
+    );
 }
