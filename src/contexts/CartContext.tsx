@@ -3,6 +3,7 @@
 import {
     createContext,
     useContext,
+    useEffect,
     useState,
     ReactNode,
 } from "react";
@@ -27,6 +28,27 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
+    const [isInitialized, setIsInitialized] = useState(false);
+
+    useEffect(() => {
+        const savedCart = localStorage.getItem("rosa-merger-cart");
+        
+        if(savedCart){
+            try{
+                setItems(JSON.parse(savedCart));
+            } catch{
+                localStorage.removeItem("rosa-merger-cart");
+            }
+        }
+
+        setIsInitialized(true);
+    }, []);
+
+    useEffect(() => {
+        if(!isInitialized) return;
+
+        localStorage.setItem("rosa-merger-cart", JSON.stringify(items));
+    }, [items, isInitialized]);
 
     const totalItems = items.reduce(
         (total, item) => total + item.quantity,
