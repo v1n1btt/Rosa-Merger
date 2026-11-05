@@ -41,7 +41,7 @@ export default function SignUpForm() {
                     data: {
                         full_name: name,
                     },
-                    emailRedirectTo: `${window.location.origin}/auth/callback`,
+                    emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
                 },
             });
 
