@@ -1093,6 +1093,117 @@ button:focus-visible {
   line-height: 1.8;
 }
 
+/* ---------- Autenticação ---------- */
+
+.auth-page {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 72px 24px 100px;
+}
+
+.auth-page h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-text);
+  margin-bottom: 16px;
+}
+
+.auth-page > p {
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.auth-page a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.auth-page a:hover {
+  opacity: 0.7;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+}
+
+.auth-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.auth-form-field input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #ded6ca;
+  border-radius: 3px;
+  background: #fffdf9;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.auth-form-field input:focus {
+  border-color: var(--color-accent);
+}
+
+.auth-form-field input::placeholder {
+  color: #aaa094;
+}
+
+.auth-form button {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid var(--color-accent);
+  border-radius: 3px;
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.auth-form button:hover:not(:disabled) {
+  background: transparent;
+  color: var(--color-accent);
+}
+
+.auth-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-form-error,
+.auth-form-success {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.auth-form-error {
+  color: #a0443d;
+}
+
+.auth-form-success {
+  color: var(--color-accent);
+}
+
 /* ---------- Responsivo ---------- */
 
 @media (hover: hover){
@@ -1300,6 +1411,12 @@ button:focus-visible {
 
   .cart-summary {
     padding: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .auth-page {
+    padding: 48px 24px 72px;
   }
 }
 

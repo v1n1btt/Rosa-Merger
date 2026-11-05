@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default async function CheckoutPage() {
     const supabase = await createClient();
@@ -11,12 +13,16 @@ export default async function CheckoutPage() {
     }
 
     return (
-        <main className="checkout-page">
-            <h1>Finalizar compra</h1>
+        <>
+            <Header />
+            <main className="checkout-page">
+                <h1>Finalizar compra</h1>
 
-            <p>
-                Para continuar com seu pedido, faça login ou crie uma conta.
-            </p>
-        </main>
+                <p>
+                    Para continuar com seu pedido, faça login ou crie uma conta.
+                </p>
+            </main>
+            <Footer />
+        </>
     )
 }
