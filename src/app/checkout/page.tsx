@@ -16,11 +16,33 @@ export default async function CheckoutPage() {
         <>
             <Header />
             <main className="checkout-page">
-                <h1>Finalizar compra</h1>
+                <div className="checkout-header">
+                    <span className="checkout-eyebrow">
+                        ROSA MERGER · FINALIZAÇÃO
+                    </span>
 
-                <p>
-                    Para continuar com seu pedido, faça login ou crie uma conta.
-                </p>
+                    <h1>Finalizar compra</h1>
+
+                    <p>
+                        Estamos quase lá! Confira seu pedido e prepare-se
+                        para receber sua bolsa.
+                    </p>
+                </div>
+
+                <div className="checkout-content">
+                    <section className="checkout-section">
+                        <h2>Seus dados</h2>
+                        <p>
+                            Em breve, você poderá conferir seus dados pessoais
+                            e endereço de entrega por aqui.
+                        </p>
+                    </section>
+
+                    <section className="checkout-section">
+                        <h2>Resumo do pedido</h2>
+                        <p>Os produtos adicionados ao carrinho aparecerão aqui.</p>
+                    </section>
+                </div>
             </main>
             <Footer />
         </>
