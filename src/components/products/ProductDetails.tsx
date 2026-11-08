@@ -45,7 +45,7 @@ export default function ProductDetails({
                         isLastUnit
                             ? "product-card-availability-low"
                             : isMadeToOrder
-                            ? "product-card-availaibiltiy-order"
+                            ? "product-card-availability-order"
                             : ""
                     }`}
                 >
@@ -78,14 +78,18 @@ export default function ProductDetails({
                     e impermeabilizada para maior proteção e durabilidade.
                 </p>
 
-                <div className="product-details-dimensions">
-                    <span>Dimensões</span>
-                    <p>
-                        {product.dimensions.width} ×{" "}
-                        {product.dimensions.height} ×{" "}
-                        {product.dimensions.depth} cm
-                    </p>
-                </div>
+                {product.dimensions.width !== null &&
+                 product.dimensions.height !== null &&
+                 product.dimensions.depth !== null && (
+                    <div className="product-details-dimensions">
+                        <span>Dimensões</span>
+                        <p>
+                            {product.dimensions.width} ×{" "}
+                            {product.dimensions.height} ×{" "}
+                            {product.dimensions.depth} cm
+                        </p>
+                    </div>
+                 )}
 
                 <div className="product-details-features">
                     <span>Características</span>

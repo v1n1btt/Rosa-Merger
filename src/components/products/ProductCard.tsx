@@ -32,12 +32,18 @@ export default function ProductCard({
     return (
         <Link href={`/colecao/${id}`} className="product-card">
             <div className="product-card-image">
-                <Image
-                    src={images[0].src}
-                    alt={images[0].alt}
-                    fill
-                    sizes="(max-width: 700px) 100vw, 33vw"
-                />
+                {images.length > 0 ? (
+                    <Image
+                        src={images[0].src}
+                        alt={images[0].alt}
+                        fill
+                        sizes="(max-width: 700px) 100vw, 33vw"
+                    />   
+                ) : (
+                    <div className="product-image-placeholder">
+                        Imagem indisponível
+                    </div>
+                )}
             </div>
 
             <div className="product-card-info">

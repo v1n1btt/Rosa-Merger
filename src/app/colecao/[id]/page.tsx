@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ProductDetails from "@/components/products/ProductDetails";
-import { products } from "@/lib/products";
+
+import { getProductById } from "@/lib/products";
 
 type ProductPageProps = {
     params: Promise<{
@@ -11,9 +12,7 @@ type ProductPageProps = {
     }>;
 };
 
-export default async function ProductPage({
-    params,
-}: ProductPageProps) {
+export default async function ProductPage({ params }: ProductPageProps) {
     const { id } = await params;
     const productId = Number(id);
 
@@ -21,9 +20,7 @@ export default async function ProductPage({
         notFound();
     }
 
-    const product = products.find(
-        (item) => item.id === productId
-    );
+    const product = await getProductById(productId);
 
     if(!product){
         notFound();
@@ -39,5 +36,5 @@ export default async function ProductPage({
 
             <Footer />
         </>
-    )
+    );
 }
