@@ -13,13 +13,7 @@ export default function AddToCartButton({
     const { addToCart } = useCart();
 
     function handleAddToCart() {
-        addToCart({
-            productId: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.images[0].src,
-            stockQuantity: product.stockQuantity,
-        });
+        addToCart(product.id);
     }
 
     return (

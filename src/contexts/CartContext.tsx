@@ -10,17 +10,14 @@ import {
 
 type CartItem = {
     productId: number;
-    name: string;
-    price: number;
-    image: string;
     quantity: number;
-    stockQuantity: number;
 }
 
 type CartContextType = {
     items: CartItem[];
     totalItems: number;
-    addToCart: (item: Omit<CartItem, "quantity">) => void;
+    isInitialized: boolean;
+    addToCart: (productId: number) => void;
     removeFromCart: (productId: number) => void;
     updateQuantity: (productId: number, quantity: number) => void;
 };
@@ -36,7 +33,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
         
         if(savedCart){
             try{
-                setItems(JSON.parse(savedCart));
+                const parsedCart = JSON.parse(savedCart);
+
+                if(!Array.isArray(parsedCart)){
+                    throw new Error("Formato de carrinho inválido.");
+                }
+
+                const sanitizedCart: CartItem[] = parsedCart
+                    .filter((item) =>
+                        Number.isSafeInteger(item.productId) &&
+                        item.productId > 0 &&
+                        Number.isSafeInteger(item.quantity) &&
+                        item.quantity > 0
+                    )
+                    .map((item) => ({
+                        productId: item.productId,
+                        quantity: item.quantity,
+                    }));
+
+                setItems(sanitizedCart);
+
             } catch{
                 localStorage.removeItem("rosa-merger-cart");
             }
@@ -56,27 +72,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
         0
     );
 
-    function addToCart(item: Omit<CartItem, "quantity">) {
-        if(item.stockQuantity <= 0) return;
+    function addToCart(productId: number) {
+        if(!Number.isSafeInteger(productId) || productId <= 0){
+            return;
+        }
 
         setItems((currentItems) => {
             const existingItem = currentItems.find(
-                (cartItem) => cartItem.productId === item.productId
+                (item) => item.productId === productId
             );
 
             if(existingItem){
-                if(existingItem.quantity >= item.stockQuantity){
-                    return currentItems;
-                }
-
-                return currentItems.map((cartItem) =>
-                    cartItem.productId === item.productId
-                        ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                        : cartItem
+                return currentItems.map((item) =>
+                    item.productId === productId
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
                 );
             }
 
-            return [...currentItems, { ...item, quantity: 1 }];
+            return [...currentItems, { productId, quantity: 1, }];
         });
     }
 
@@ -87,12 +101,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
 
     function updateQuantity(productId: number, quantity: number) {
-        if(quantity < 1) return;
+        if(!Number.isSafeInteger(quantity) || quantity < 1) return;
 
         setItems((currentItems) => 
             currentItems.map((item) =>
                 item.productId === productId
-                    ? { ...item, quantity: Math.min(quantity, item.stockQuantity), }
+                    ? { ...item, quantity, }
                     : item
             )
         );
@@ -100,7 +114,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     return (
         <CartContext.Provider
-            value={{ items, totalItems, addToCart, removeFromCart, updateQuantity }}
+            value={{
+                items,
+                totalItems,
+                isInitialized,
+                addToCart,
+                removeFromCart,
+                updateQuantity,
+            }}
         >
             {children}
         </CartContext.Provider>

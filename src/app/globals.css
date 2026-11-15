@@ -1069,6 +1069,14 @@ button:focus-visible {
   background-color: #46513e;
 }
 
+.cart-checkout-button:disabled {
+  width: 100%;
+  border: none;
+  font-family: inherit;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* ---------- Checkout ---------- */
 
 .checkout-page {
